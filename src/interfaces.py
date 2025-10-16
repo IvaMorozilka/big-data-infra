@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import Any, Optional, Dict
+from typing import Any, List, Optional, Dict
 
 class IStorageEngine(ABC):
     """
@@ -45,6 +45,26 @@ class IPersistence(ABC):
     @abstractmethod
     def load(self) -> Optional[Dict[str, Any]]:
         """Загружает снапшот данных с диска."""
+        pass
+
+class IWriteAheadLog(ABC):
+    """
+    Интерфейс для механизма WAL.
+    """
+
+    @abstractmethod
+    def log(self, operation: Dict[str, Any]) -> None:
+        """Логирует одну операцию в журнал"""
+        pass
+
+    @abstractmethod
+    def replay(self) -> List[Dict[str, Any]]:
+        """Читает и возвращает все операции из журнала."""
+        pass
+
+    @abstractmethod
+    def compact(self) -> None:
+        """Очищает журнал"""
         pass
 
 
