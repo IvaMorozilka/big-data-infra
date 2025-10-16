@@ -2,6 +2,6 @@
 
 ## ЛР 1. Скелет программы
 
-![Архитектура](https://img.plantuml.biz/plantuml/png/3SYx4S8m303GdYd20B5wDg1W24LMOXssdDCdt34zlFBTHQbdvRI-j8ZJ7m26dt98jDpIsMXgi4QXEU1vuMlQ_4f_8snoh1K3Lz7T48ntXyPO7GQAGexkW4PDWYdIk9p_klq0)
+![Архитектура](https://www.plantuml.com/plantuml/png/1S7B3S8m303GLM20ndSsuC0GhkCs5evJ-GCIq_FUNOoqEfVhRMHUyG1m_BPJSjHUmKxBaYqRhGdF3xwMhv_e6s6NS-kOk8aTZk1y10p67Z1H36fg03eDIQOivtRLr3y0)
 
 In-memory Key-Value хранилища данных на Python. В основе лежит использование хэш-таблицы (dict). Персистентность обеспечиватется переодическими снапшотами и WAL.
