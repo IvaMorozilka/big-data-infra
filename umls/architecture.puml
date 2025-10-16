@@ -1,0 +1,59 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+title Архитектура KVDB
+
+package "Интерфейсы" {
+    interface IDatabase {
+        + set(key: str, value: Any): void
+        + get(key: str): Optional<Any>
+        + delete(key: str): bool
+    }
+
+    interface IStorageEngine {
+        + set(key: str, value: Any): void
+        + get(key: str): Optional<Any>
+        + delete(key: str): bool
+        + get_all_data(): Dict<str, Any>
+        + load_data(data: Dict<str, Any>): void
+    }
+
+    interface IPersistence {
+        + dump(data: Dict<str, Any>): void
+        + load(): Optional<Dict<str, Any>>
+    }
+}
+
+package "Имплементация" {
+    class KVDB {
+        - storage_engine: IStorageEngine
+        - persistence: IPersistence
+        + set(key: str, value: Any): void
+        + get(key: str): Optional<Any>
+        + delete(key: str): bool
+    }
+
+    class InMemoryStorage {
+        - data: Dict<str, Any>
+        + set(key: str, value: Any): void
+        + get(key: str): Optional<Any>
+        + delete(key: str): bool
+        + get_all_data(): Dict<str, Any>
+        + load_data(data: Dict<str, Any>): void
+    }
+
+    class SnapshotPersistence {
+        - file_path: str
+        + dump(data: Dict<str, Any>): void
+        + load(): Optional<Dict<str, Any>>
+    }
+}
+
+IDatabase <|.. KVDB
+IStorageEngine <|.. InMemoryStorage
+IPersistence <|.. SnapshotPersistence
+
+KVDB o-- IStorageEngine
+KVDB o-- IPersistence
+
+@enduml
