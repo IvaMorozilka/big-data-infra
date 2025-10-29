@@ -1,7 +1,18 @@
 [project]
-name = "big-data-infra"
-version = "0.1.0"
-description = "Add your description here"
+name = "KVDB"
+version = "0.2.0"
+description = "In-memory Key-Value database"
 readme = "README.md"
 requires-python = ">=3.12"
-dependencies = []
+dependencies = [
+    "fastapi[standard]>=0.120.1",
+]
+
+[dependency-groups]
+dev = [
+    "ipykernel>=7.1.0",
+    "ipywidgets>=8.1.7",
+    "notebook>=7.4.7",
+    "pytest>=8.4.2",
+    "pytest-cov>=4.1.0",
+]
