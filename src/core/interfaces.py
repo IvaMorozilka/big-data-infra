@@ -87,3 +87,39 @@ class IDatabase(ABC):
     def delete(self, key: str) -> bool:
         """Удаляет значение по ключу."""
         pass
+
+
+class ICollection(ABC):
+    """
+    Интерфейс для коллекции - логической группы данных с общим префиксом.
+    """
+
+    @abstractmethod
+    def set(self, key: str, value: Any) -> None:
+        """Сохраняет значение в коллекции."""
+        pass
+
+    @abstractmethod
+    def get(self, key: str) -> Optional[Any]:
+        """Получает значение из коллекции."""
+        pass
+
+    @abstractmethod
+    def delete(self, key: str) -> bool:
+        """Удаляет значение из коллекции."""
+        pass
+
+    @abstractmethod
+    def get_all(self) -> Dict[str, Any]:
+        """Получает все данные из коллекции."""
+        pass
+
+    @abstractmethod
+    def count(self) -> int:
+        """Возвращает количество элементов в коллекции."""
+        pass
+
+    @abstractmethod
+    def exists(self, key: str) -> bool:
+        """Проверяет, существует ли ключ в коллекции."""
+        pass
