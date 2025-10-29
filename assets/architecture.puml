@@ -1,0 +1,98 @@
+@startuml architecture
+skinparam classAttributeIconSize 0
+
+title Архитектура KVDB
+
+package "Интерфейсы" {
+    interface IDatabase {
+        + set(key: str, value: Any): void
+        + get(key: str): Optional<Any>
+        + delete(key: str): bool
+    }
+
+    interface IStorageEngine {
+        + set(key: str, value: Any): void
+        + get(key: str): Optional<Any>
+        + delete(key: str): bool
+        + get_all_data(): Dict<str, Any>
+        + load_data(data: Dict<str, Any>): void
+    }
+
+    interface IPersistence {
+        + dump(data: Dict<str, Any>): void
+        + load(): Optional<Dict<str, Any>>
+    }
+
+     interface IWriteAheadLog {
+        + log(operation: dict): void
+        + replay(): List[dict]
+        + compact(): void
+    }
+
+    interface ICollection {
+        + set(key: str, value: Any): void
+        + get(key: str): Optional<Any>
+        + delete(key: str): bool
+        + get_all(): Dict<str, Any>
+        + count(): int
+        + exists(key: str): bool
+    }
+}
+
+package "Имплементация" {
+    class KVDB {
+        - storage_engine: IStorageEngine
+        - persistence: IPersistence
+        - wal: IWriteAheadLog
+        + set(key: str, value: Any): void
+        + get(key: str): Optional<Any>
+        + delete(key: str): bool
+    }
+
+    class InMemoryStorage {
+        - data: Dict<str, Any>
+        + set(key: str, value: Any): void
+        + get(key: str): Optional<Any>
+        + delete(key: str): bool
+        + get_all_data(): Dict<str, Any>
+        + load_data(data: Dict<str, Any>): void
+    }
+
+    class Snapshotter {
+        - file_path: str
+        + dump(data: Dict<str, Any>): void
+        + load(): Optional<Dict<str, Any>>
+    }
+
+    class FileWal {
+        - file_handler: File
+        + log(operation: dict): void
+        + replay(): List[dict]
+        + compact(): void
+    }
+
+    class Collection {
+        - db: IDatabase
+        - name: str
+        - prefix: str
+        + set(key: str, value: Any): void
+        + get(key: str): Optional<Any>
+        + delete(key: str): bool
+        + get_all(): Dict<str, Any>
+        + count(): int
+        + exists(key: str): bool
+    }
+}
+
+IDatabase <|.. KVDB
+IStorageEngine <|.. InMemoryStorage
+IPersistence <|.. Snapshotter
+IWriteAheadLog <|.. FileWal
+ICollection <|.. Collection
+
+KVDB o-- IStorageEngine
+KVDB o-- IPersistence
+KVDB o-- IWriteAheadLog
+Collection o-- IDatabase
+
+@enduml
