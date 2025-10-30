@@ -1,6 +1,6 @@
 [project]
 name = "KVDB"
-version = "0.2.0"
+version = "0.2.1"
 description = "In-memory Key-Value database"
 readme = "README.md"
 requires-python = ">=3.12"
@@ -15,4 +15,5 @@ dev = [
     "notebook>=7.4.7",
     "pytest>=8.4.2",
     "pytest-cov>=4.1.0",
+    "pytest-html>=4.1.1",
 ]
