@@ -1,6 +1,6 @@
 import logging
 from typing import Any, Optional
-from src.core.interfaces import IDatabase, IStorageEngine, IPersistence, IWriteAheadLog
+from app.core.interfaces import IDatabase, IStorageEngine, IPersistence, IWriteAheadLog
 
 logger = logging.getLogger(__name__)
 

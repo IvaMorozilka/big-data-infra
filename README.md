@@ -15,24 +15,24 @@ In-memory Key-Value хранилища данных на Python. В основе
 
 ### Реализованные интерфейсы
 
-1. **IStorageEngine** → [InMemoryStorage](src/core/storage.py)
-2. **IPersistence** → [Snapshotter](src/core/persistence.py)
-3. **IWriteAheadLog** → [FileWal](src/core/wal.py)
-4. **IDatabase** → [KVDB](src/core/database.py)
+1. **IStorageEngine** → [InMemoryStorage](app/core/storage.py)
+2. **IPersistence** → [Snapshotter](app/core/persistence.py)
+3. **IWriteAheadLog** → [FileWal](app/core/wal.py)
+4. **IDatabase** → [KVDB](app/core/database.py)
 
 Новый интерфейс ICollection:
 Позволяет организовывать независимые коллекции с помощью добавления префикса `<название_коллекции>:` к ключу
 
-**ICollection** → [Collection](src/core/collection.py)
+**ICollection** → [Collection](app/core/collection.py)
 
 ### Пример использования
 
 ```python
-from src.core import KVDB
-from src.core.storage import InMemoryStorage
-from src.core.persistence import Snapshotter
-from src.core.wal import FileWal
-from src.core.collection import Collection
+from app.core import KVDB
+from app.core.storage import InMemoryStorage
+from app.core.persistence import Snapshotter
+from app.core.wal import FileWal
+from app.core.collection import Collection
 
 # Инициализация базы данных
 db = KVDB(

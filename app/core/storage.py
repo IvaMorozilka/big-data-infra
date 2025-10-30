@@ -1,5 +1,5 @@
 from typing import Any, Optional, Dict
-from src.core.interfaces import IStorageEngine
+from app.core.interfaces import IStorageEngine
 
 
 class InMemoryStorage(IStorageEngine):

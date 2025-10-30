@@ -1,7 +1,7 @@
 import json
 import os
 from typing import Any, List, Dict
-from src.core.interfaces import IWriteAheadLog
+from app.core.interfaces import IWriteAheadLog
 
 
 class FileWal(IWriteAheadLog):

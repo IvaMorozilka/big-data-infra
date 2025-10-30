@@ -1,7 +1,7 @@
 import json
 import os
 from typing import Any, Optional, Dict
-from src.core.interfaces import IPersistence
+from app.core.interfaces import IPersistence
 
 
 class Snapshotter(IPersistence):

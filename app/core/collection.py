@@ -1,5 +1,5 @@
 from typing import Any, Optional, Dict
-from src.core.interfaces import IDatabase, ICollection
+from app.core.interfaces import IDatabase, ICollection
 import logging
 
 logger = logging.getLogger(__name__)
